@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: '0 9 * * *'
 
+permissions:
+  contents: write  
+
 jobs:
   fetch-figma:
     runs-on: ubuntu-latest
@@ -23,6 +26,5 @@ jobs:
           git config user.name github-actions
           git config user.email actions@github.com
           git add figma_design.json
-          git commit -m "자동 저장: Figma JSON" || echo "No changes to commit"
+          git commit -m "자동 저장: Figma JSON" || echo "No changes"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
-
