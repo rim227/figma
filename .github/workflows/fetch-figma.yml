@@ -20,8 +20,9 @@ jobs:
 
       - name: Commit Figma JSON
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
+          git config user.name github-actions
+          git config user.email actions@github.com
           git add figma_design.json
-          git commit -m "자동 저장: Figma JSON"
-          git push
+          git commit -m "자동 저장: Figma JSON" || echo "No changes to commit"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
+
